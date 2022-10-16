@@ -21,9 +21,3 @@ class TicketTypeRequest:
 
         if not self.number_of_tickets >= 0:
             raise ValueError("number_of_tickets must be positive")
-
-    def get_ticket_type(self):
-        return self.ticket_type
-
-    def get_tickets_number(self):
-        return self.number_of_tickets

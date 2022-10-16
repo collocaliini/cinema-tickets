@@ -29,20 +29,3 @@ class TestTicketTypeRequest(TestCase):
         assume(ticket_type not in VALID_TICKET_TYPES)
         with self.assertRaises(TypeError):
             TicketTypeRequest(ticket_type, number_of_tickets)
-
-    def test_immutable(self):
-        request = TicketTypeRequest("ADULT", 6)
-        with self.assertRaises(AttributeError):
-            request.ticket_type = "CHILD"
-        with self.assertRaises(AttributeError):
-            request.number_of_tickets = 7
-
-    @given(sampled_from(VALID_TICKET_TYPES), integers(min_value=0))
-    def test_get_ticket_type(self, ticket_type, number_of_tickets):
-        request = TicketTypeRequest(ticket_type, number_of_tickets)
-        self.assertEqual(request.get_ticket_type(), ticket_type)
-
-    @given(sampled_from(VALID_TICKET_TYPES), integers(min_value=0))
-    def test_get_tickets_number(self, ticket_type, number_of_tickets):
-        request = TicketTypeRequest(ticket_type, number_of_tickets)
-        self.assertEqual(request.get_tickets_number(), number_of_tickets)
