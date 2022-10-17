@@ -2,6 +2,8 @@ from ticket_type_request import TicketTypeRequest
 
 
 class TicketInformationService:
+    """Service class for providing pricing and reservation rules for tickets"""
+
     _ticket_type_prices = {
         "ADULT": 20,
         "CHILD": 10,

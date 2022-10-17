@@ -12,7 +12,23 @@ class TicketService:
 
     MAXIMUM_NUMBER_OF_TICKETS = 20
 
-    def purchase_tickets(self, account_id: int, ticket_type_requests: list[TicketTypeRequest] | dict[str, int]) -> None:
+    def purchase_tickets(self, account_id: int, ticket_type_requests: dict[str, int] | list[TicketTypeRequest]) -> None:
+        """Purchase tickets and reserve seats for the specified account
+
+        account_id: can be any positive integer.
+        ticket_type_requests: can be specified as a dict mapping
+        ticket types ("ADULT", "CHILD", "INFANT") to number of
+        tickets requested per type, or as a list of TicketTypeRequests.
+
+        Examples:
+        >>> TicketService().purchase_tickets(22910, {"ADULT": 10, "CHILD": 5, "INFANT": 3})
+
+        >>> TicketService().purchase_tickets(
+        ...     22910,
+        ...     [TicketTypeRequest("ADULT", 10), TicketTypeRequest("CHILD", 5), TicketTypeRequest("INFANT", 3)],
+        ... )
+
+        """
         if isinstance(ticket_type_requests, dict):
             ticket_type_requests: list[TicketTypeRequest] = [
                 TicketTypeRequest(key, value)
